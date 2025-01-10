@@ -16,9 +16,14 @@ class Book:
         books.append(Book(title, author, genre, publication_date))
  
     def borrow_book():
-        title = input("Enter book to borrow: ")
-        if title in books:
-            book = books[title]
+        title = input("Enter book to borrow: ").capitalize()
+        book__found = None
+
+        for book in books:
+            if book.title == title:
+                book_found = book
+                break
+
             if book.availability == True:
                 book.availability = False
                 print(f"Book {title} has been borrowed. ")
@@ -28,19 +33,23 @@ class Book:
             print(f"Book '{title}' does not exist.")
 
 
-    def return_book(self):
+    def return_book():
         title = input("Enter book to return: ")
         if title in books:
-            self.availability=True
+            books[title].availability=True
             print(f"Book {title} has been returned.")
         else:
             print(f"Book '{title}' does not exist.")
 
-    def search_title(self):
+    def search_title():
         title = input("Enter title to search: ")
         if title in books:
             print(Book(title))
 
-    def display_books(self):
-        print(f"Books: {books}")
+    def display_books():
+        for book in books:
+            print("Library Books:")
+            print(f"Title: {books.title}")
 
+default_book = Book("The Alchemist", "Paulo Coelho", "Fiction", 1988)
+books.append(default_book)
