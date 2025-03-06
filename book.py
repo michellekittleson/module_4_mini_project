@@ -8,12 +8,10 @@ class Book:
         self.publication_date = publication_date
         self.availability = availability
    
-    def add_book(): 
-        title = input("Enter title: ")
-        author = input("Enter author: ")
-        genre = input("Enter genre: ")
-        publication_date = input("Enter publication date: ")
-        books.append(Book(title, author, genre, publication_date))
+    def add_book(title, author, genre, publication_date): 
+
+        books.append(Book({'title': title, 'author': author, 'genre': genre, 'publication date': publication_date}))
+        print(f"Book '{title}' has been added!")
  
     def borrow_book():
         title = input("Enter book to borrow: ").capitalize()

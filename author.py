@@ -9,6 +9,7 @@ class Author:
         name = input("Enter author's name: ")
         biography = input("Enter author's biography: ")
         authors.append(f"Name: {name}, Biography: {biography}")
+        print(f"Author {name} has been added!")
 
     def view_author_details(self):
         name = input("Enter author's name: ")

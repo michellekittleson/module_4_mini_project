@@ -3,6 +3,7 @@ from user import User
 from author import Author
 
 def main():
+
     while True:
         print("Welcome to the Library Management System!")
         print("\nMain Menu:\n1. Book Operations\n2. User Operations\n3. Author Operations\n4. Quit")
@@ -15,7 +16,12 @@ def main():
                 choice = input("Enter your choice: ")
                 try:
                     if choice == '1':
-                        Book.add_book()
+                        title = input("Enter title: ")
+                        author = input("Enter author: ")
+                        genre = input("Enter genre: ")
+                        publication_date = input("Enter publication date: ")
+                        Book.add_book(title, author, genre, publication_date)
+                        
                     elif choice == '2':
                         Book.borrow_book()
                     elif choice == '3':
