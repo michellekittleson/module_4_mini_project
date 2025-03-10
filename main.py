@@ -1,8 +1,9 @@
-from book import Book
+from book import Book, Library
 from user import User
 from author import Author
 
 def main():
+
 
     while True:
         print("Welcome to the Library Management System!")
@@ -20,16 +21,29 @@ def main():
                         author = input("Enter author: ")
                         genre = input("Enter genre: ")
                         publication_date = input("Enter publication date: ")
-                        Book.add_book(title, author, genre, publication_date)
+                        Library.add_book(title, author, genre, publication_date)
+                        print(f"Book '{title}' has been added!")
                         
                     elif choice == '2':
-                        Book.borrow_book()
+                        title = input("Enter book to borrow: ").capitalize()
+                        if Library.borrow_book():
+                            print(f"Book {title} has been borrowed. ")
+                        else:
+                            print("Book is not available.")
+
                     elif choice == '3':
-                        Book.return_book()
+                        Library.return_book()
+                        print(f"'{title}' has been returned.")
                     elif choice == '4':
-                        Book.search_title()
+                        title = input("Enter title to search: ")
+                        if Library.search_title():
+                            print(f"Book '{title}' found.")
+                        else:
+                            print(f"Book '{title}' not found in the library.")
                     elif choice == '5':
-                        Book.display_books()
+                        library_books = Library.get_books()
+                        for book in library_books:
+                            print(f"Title: {book.title}, Author: {book.author}, Genre: {book.genre}, Publication Date: {book.publication_date}")
                 except Exception as e:
                     print(f"An error occurred: {e}")
             elif choice == '2':
@@ -37,9 +51,12 @@ def main():
                 choice == input("Enter your choice: ")
                 try:
                     if choice == '1':
+                        name = input("Enter name: ")
+                        library_id = input("Enter library id: ")
                         User.add_user()
                     elif choice == '2':
-                        User.User.view_user_details()
+                        name = input("Enter name: ")
+                        print(User.name)
                     elif choice == '3':
                         User.display_users()
                 except Exception as e:
@@ -49,9 +66,11 @@ def main():
                 choice = input("Enter your choice: ")
                 try:
                     if choice == '1':
-                        Author.add_author
+                        Author.add_author()
+                        print(f"Author {name} has been added!")
                     elif choice == '2':
                         Author.view_author_details()
+                        print(f"Name: {author.name}, Biography: {author.biography}")
                     elif choice == '3':
                         Author.display_authors()
                 except Exception as e:

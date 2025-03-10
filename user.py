@@ -7,13 +7,9 @@ class User:
         self.borrowed_books = borrowed_books 
 
     def add_user(self):
-        name = input("Enter name: ")
-        library_id = input("Enter library id: ")
-        users.append(User(name))
+        users.append(User.name)
 
-    def view_user_details(self):
-        name = input("Enter name: ")
-        print(User(name))
 
     def display_users(self):
-        print(f"Users: {users}")
+        for user in users:
+            print(user)

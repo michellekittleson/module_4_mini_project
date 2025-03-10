@@ -1,55 +1,67 @@
 # M4L2 Exercise 1
 
-books = []
+import enum
+class BookAvailability(enum.Enum):
+    available = 1
+    borrowed = 2
+    
 
 class Book:
-    def __init__(self, title, author, genre, publication_date, availability=True):
+    availability = BookAvailability
+    def __init__(self, title, author, genre, publication_date):
         self.title = title
         self.author = author
         self.genre = genre
         self.publication_date = publication_date
-        self.availability = availability
-   
-    def add_book(title, author, genre, publication_date): 
-
-        books.append(Book({'title': title, 'author': author, 'genre': genre, 'publication date': publication_date}))
-        print(f"Book '{title}' has been added!")
+        self.availability = BookAvailability.available
+        self._current_user = None
  
-    def borrow_book():
-        title = input("Enter book to borrow: ").capitalize()
-        book__found = None
-
-        for book in books:
-            if book.title == title:
-                book_found = book
-                break
-
-            if book.availability == True:
-                book.availability = False
-                print(f"Book {title} has been borrowed. ")
-            else:
-                print("Book is not available.")
-        else:
-            print(f"Book '{title}' does not exist.")
-
-
+    def borrow(user):
+        _current_user = user
+        availability = BookAvailability.borrowed
+    
     def return_book():
-        title = input("Enter book to return: ")
-        if title in books:
-            books[title].availability=True
-            print(f"Book {title} has been returned.")
+        _current_user = None
+        availability = BookAvailability.available
+
+
+books = []
+
+class Library:
+
+    def __init__(self, books):
+        self.__books = books
+
+
+    def add_book(title, author, genre, publication_date): 
+        __books.append(Book({'title': title, 'author': author, 'genre': genre, 'publication date': publication_date}))
+
+    def borrow_book(user, title):
+        for book in __books:
+            if book.title == title:
+                book.borrow(user)
+                break
         else:
-            print(f"Book '{title}' does not exist.")
+            return False
 
-    def search_title():
-        title = input("Enter title to search: ")
-        if title in books:
-            print(Book(title))
 
-    def display_books():
-        for book in books:
-            print("Library Books:")
-            print(f"Title: {books.title}")
+    def return_book(title):
+        for book in __books:
+            if book.title == title:
+                book.return_book()
+                break
+        else:
+            return False
 
-default_book = Book("The Alchemist", "Paulo Coelho", "Fiction", 1988)
-books.append(default_book)
+    def search_title(title):
+        for book in __books:
+            if book.title == title:
+                return True
+        else:
+            return False
+
+    def get_books(self):
+        return self.__books
+
+# default_book = Book("The Alchemist", "Paulo Coelho", "Fiction", 1988)
+# books.append(default_book)
