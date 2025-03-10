@@ -1,8 +1,12 @@
 from book import Book, Library
 from user import User
 from author import Author
+from user import User, UserManager
 
 def main():
+
+    my_library = Library("The Library")
+    my_user_manager = UserManager()
 
 
     while True:
@@ -21,46 +25,49 @@ def main():
                         author = input("Enter author: ")
                         genre = input("Enter genre: ")
                         publication_date = input("Enter publication date: ")
-                        Library.add_book(title, author, genre, publication_date)
+                        my_library.add_book(title, author, genre, publication_date)
                         print(f"Book '{title}' has been added!")
                         
                     elif choice == '2':
                         title = input("Enter book to borrow: ").capitalize()
-                        if Library.borrow_book():
+                        current_user = input("Enter user's name: ")
+                        if current_user.borrow_book():
                             print(f"Book {title} has been borrowed. ")
                         else:
-                            print("Book is not available.")
+                            print("Book is either not in the library or is already checked out.")
 
                     elif choice == '3':
-                        Library.return_book()
+                        my_library.return_book()
                         print(f"'{title}' has been returned.")
                     elif choice == '4':
                         title = input("Enter title to search: ")
-                        if Library.search_title():
+                        if my_library.search_title():
                             print(f"Book '{title}' found.")
                         else:
                             print(f"Book '{title}' not found in the library.")
                     elif choice == '5':
-                        library_books = Library.get_books()
+                        library_books = my_library.get_books()
                         for book in library_books:
                             print(f"Title: {book.title}, Author: {book.author}, Genre: {book.genre}, Publication Date: {book.publication_date}")
                 except Exception as e:
                     print(f"An error occurred: {e}")
+
             elif choice == '2':
                 print("\nUser Operations:\n1. Add a new user\n2. View user details\n3. Display all users")
                 choice == input("Enter your choice: ")
                 try:
                     if choice == '1':
-                        name = input("Enter name: ")
-                        library_id = input("Enter library id: ")
-                        User.add_user()
+                        name = input("Enter user name: ")
+                        library_id = input("Enter library id: ") # Is library ID for the user or for the library?
+                        my_user_manager.add_user()
                     elif choice == '2':
-                        name = input("Enter name: ")
+                        name = input("Enter user name: ")
                         print(User.name)
                     elif choice == '3':
-                        User.display_users()
+                        print(my_user_manager.get_users())
                 except Exception as e:
                     print(f"An error occurred: {e}")
+
             elif choice == '3':
                 print("\nAuthor Operations:\n1. Add a new author\n2. View author details\n3. Display all authors")
                 choice = input("Enter your choice: ")

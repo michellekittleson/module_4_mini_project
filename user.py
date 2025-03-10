@@ -1,15 +1,40 @@
-users = []
+
+
+class UserManager:
+    def __init__(self):
+        self.__users = []
+
+    def add_user():
+        # Check if user already exists
+        __users.append(User.name)
+
+    def get_users():
+        return __users
+
 
 class User:
-    def __init__(self, name, library_id, borrowed_books):
+    __borrowed_books = []
+
+    def get_borrowed_books(self):
+        return self.__borrowed_books
+
+    def __init__(self, name, user_id):
         self.name = name 
-        self.library_id = library_id 
-        self.borrowed_books = borrowed_books 
-
-    def add_user(self):
-        users.append(User.name)
-
-
-    def display_users(self):
-        for user in users:
-            print(user)
+        self.user_id = user_id 
+        # Library ID?
+    
+    def borrow_book(self, title):
+        for book in self.__borrowed_books:
+            if book.title == title:
+                return False
+        else:
+            return False
+        # If book is not in the library
+    
+    def return_book(title):
+        for book in __books:
+            if book.title == title:
+                book.return_book()
+                break
+        else:
+            return False

@@ -16,42 +16,29 @@ class Book:
         self.availability = BookAvailability.available
         self._current_user = None
  
-    def borrow(user):
-        _current_user = user
+    def borrow():
         availability = BookAvailability.borrowed
     
     def return_book():
-        _current_user = None
         availability = BookAvailability.available
 
 
-books = []
+
 
 class Library:
 
-    def __init__(self, books):
-        self.__books = books
+    def __init__(self, name):
+        self.__books = []
+        self.__name = name
 
 
-    def add_book(title, author, genre, publication_date): 
-        __books.append(Book({'title': title, 'author': author, 'genre': genre, 'publication date': publication_date}))
-
-    def borrow_book(user, title):
-        for book in __books:
-            if book.title == title:
-                book.borrow(user)
-                break
-        else:
-            return False
+    def add_book(self, title, author, genre, publication_date): 
+        self.__books.append(Book({'title': title, 'author': author, 'genre': genre, 'publication date': publication_date}))
 
 
-    def return_book(title):
-        for book in __books:
-            if book.title == title:
-                book.return_book()
-                break
-        else:
-            return False
+
+
+
 
     def search_title(title):
         for book in __books:
