@@ -18,7 +18,7 @@ class Author:
                 return author
         
 
-    def display_authors():
+    def display_authors(self):
         for author in authors:
             print(author)
        

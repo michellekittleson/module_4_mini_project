@@ -1,4 +1,5 @@
 # M4L2 Exercise 1
+books = []
 
 import enum
 class BookAvailability(enum.Enum):
@@ -28,27 +29,24 @@ class Book:
 class Library:
 
     def __init__(self, name):
-        self.__books = []
+        self.books = []
         self.__name = name
 
 
     def add_book(self, title, author, genre, publication_date): 
-        self.__books.append(Book({'title': title, 'author': author, 'genre': genre, 'publication date': publication_date}))
+        book = Book(title, author, genre, publication_date)
+        self.books.append(book)
 
 
-
-
-
-
-    def search_title(title):
-        for book in __books:
+    def search_title(self, title):
+        for book in self.books:
             if book.title == title:
                 return True
         else:
             return False
 
     def get_books(self):
-        return self.__books
+        return self.books
 
 # default_book = Book("The Alchemist", "Paulo Coelho", "Fiction", 1988)
 # books.append(default_book)
