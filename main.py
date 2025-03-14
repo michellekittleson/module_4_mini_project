@@ -1,13 +1,10 @@
 from book import Book, Library
-from user import User
 from author import Author
-from user import User, UserManager
+
 
 def main():
 
     my_library = Library("The Library")
-    my_user_manager = UserManager()
-    # new_author = Author()
 
 
     while True:
@@ -30,18 +27,22 @@ def main():
                         my_library.add_book(title, author, genre, publication_date)
                         print(f"Book '{title}' has been added!")
                         
-                    # An error occurred" 'str' object has no attribute 'borrow_book'
+                    # An error occurred" 'Library' object has no attribute 'users'
                     elif choice == '2':
                         title = input("Enter book to borrow: ").capitalize()
-                        current_user = input("Enter user's name: ")
-                        if current_user.borrow_book():
-                            print(f"Book {title} has been borrowed. ")
+                        current_user = my_library.get_user(input("Enter user's name: "))
+                        if current_user and my_library.borrow_book(title, current_user):
+                            print(f"Book {title} has been borrowed.")
                         else:
                             print("Book is either not in the library or is already checked out.")
-                    # An error occurred: 'Library' object has no attribute 'return_book'
+                    # An error occurred: 'Library' object has no attribute 'users'
                     elif choice == '3':
-                        my_library.return_book()
-                        print(f"'{title}' has been returned.")
+                        title = input("Enter book to return: ").capitalize()
+                        current_user = my_library.get_user(input("Enter user's name: "))
+                        if current_user and my_library.return_book(title, current_user):
+                            print(f"'{title}' has been returned.")
+                        else:
+                            print("Book return failed.")
                     # Works!
                     elif choice == '4':
                         title = input("Enter title to search: ")
@@ -59,20 +60,24 @@ def main():
 
             elif choice == '2':
                 print("\nUser Operations:\n1. Add a new user\n2. View user details\n3. Display all users")
-                choice == input("Enter your choice: ")
+                choice = input("Enter your choice: ")
                 try:
-                    # An error occurred: type object 'User' has no attribute 'name'
+                    # An error occurred: 'Library' object has no attribute 'users'
                     if choice == '1':
                         name = input("Enter user name: ")
                         library_id = input("Enter library id: ") 
-                        my_user_manager.add_user(name, library_id)
-                    # An error occurred: type object 'User' has no attribute 'name'
+                        my_library.add_user(name, library_id)
+                    # An error occurred: 'Library' object has no attribute 'users'
                     elif choice == '2':
                         name = input("Enter user name: ")
-                        print(User.name)
-                    # I think not working because options 1 and 2 are not working
+                        user = my_library.get_user(name) # Retrieve user object
+                        if user:
+                            print(user.name)
+                        else:
+                            print("User not found.")
+                    # An error occurred: 'Library' object has no attribute '_Library__users'
                     elif choice == '3':
-                        print(my_user_manager.get_users())
+                        print(my_library.get_users())
                 except Exception as e:
                     print(f"An error occurred: {e}")
 
@@ -80,15 +85,20 @@ def main():
                 print("\nAuthor Operations:\n1. Add a new author\n2. View author details\n3. Display all authors")
                 choice = input("Enter your choice: ")
                 try:
-                    # Did not like line 10 new_author = Author()
+                    # An error occurred: Library.add_author() missing 1 required positional argument: 'biography'
                     if choice == '1':
-                        new_author.add_author(name, biography)
+                        name = input("Enter author name: ")
+                        biography = input("Enter biography: ")
+                        new_author = Author(name, biography)
+                        my_library.add_author(new_author)
                         print(f"Author {name} has been added!")
+                    # An error occurred: cannot access local variable 'author' where it is not associated with a value
                     elif choice == '2':
                         new_author.view_author_details()
                         print(f"Name: {author.name}, Biography: {author.biography}")
+                    # Still need to make
                     elif choice == '3':
-                        Author.display_authors()
+                        pass
                 except Exception as e:
                     print(f"An error occurred: {e}")
             elif choice == '4':
