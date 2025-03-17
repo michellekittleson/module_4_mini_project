@@ -1,10 +1,17 @@
-from book import Book, Library
+from book import Book
+from library import Library
 from author import Author
 
 
 def main():
 
     my_library = Library("The Library")
+
+    # Add defaults
+    # my_library.add_author("Paulo Coelho", "Paulo Coelho is a Brazilian author who has published many books.")
+    # my_library.add_user("Alice", "1234")
+    # my_library.add_user("Bob", "5678")
+    # my_library.add_book("The Alchemist", "Paulo Coelho", "Fiction", 1988)
 
 
     while True:
@@ -27,7 +34,7 @@ def main():
                         my_library.add_book(title, author, genre, publication_date)
                         print(f"Book '{title}' has been added!")
                         
-                    # An error occurred" 'Library' object has no attribute 'users'
+                    # Even though the book is displaying properly after being added, it says "Book is either not in the library or is already checked out."
                     elif choice == '2':
                         title = input("Enter book to borrow: ").capitalize()
                         current_user = my_library.get_user(input("Enter user's name: "))
@@ -35,7 +42,7 @@ def main():
                             print(f"Book {title} has been borrowed.")
                         else:
                             print("Book is either not in the library or is already checked out.")
-                    # An error occurred: 'Library' object has no attribute 'users'
+                    # "Book return failed" Could be because borrow book function is not working properly.
                     elif choice == '3':
                         title = input("Enter book to return: ").capitalize()
                         current_user = my_library.get_user(input("Enter user's name: "))
@@ -62,12 +69,12 @@ def main():
                 print("\nUser Operations:\n1. Add a new user\n2. View user details\n3. Display all users")
                 choice = input("Enter your choice: ")
                 try:
-                    # An error occurred: 'Library' object has no attribute 'users'
+                    # Appears to work
                     if choice == '1':
                         name = input("Enter user name: ")
                         library_id = input("Enter library id: ") 
                         my_library.add_user(name, library_id)
-                    # An error occurred: 'Library' object has no attribute 'users'
+                    # An error occurred: 'User' object has no attribute 'name'
                     elif choice == '2':
                         name = input("Enter user name: ")
                         user = my_library.get_user(name) # Retrieve user object
@@ -75,9 +82,11 @@ def main():
                             print(user.name)
                         else:
                             print("User not found.")
-                    # An error occurred: 'Library' object has no attribute '_Library__users'
+                    # An error occurred: 'User' object is not iterable
                     elif choice == '3':
-                        print(my_library.get_users())
+                        all_users = my_library.get_users()
+                        for user in all_users:
+                            print(f"User name: {user.name}, Library ID: {user.library_id}")
                 except Exception as e:
                     print(f"An error occurred: {e}")
 
@@ -85,7 +94,7 @@ def main():
                 print("\nAuthor Operations:\n1. Add a new author\n2. View author details\n3. Display all authors")
                 choice = input("Enter your choice: ")
                 try:
-                    # An error occurred: Library.add_author() missing 1 required positional argument: 'biography'
+                    # Appears to work
                     if choice == '1':
                         name = input("Enter author name: ")
                         biography = input("Enter biography: ")
@@ -96,9 +105,12 @@ def main():
                     elif choice == '2':
                         new_author.view_author_details()
                         print(f"Name: {author.name}, Biography: {author.biography}")
-                    # Still need to make
+                    # An error occurred: 'NoneType' object is not iterable
                     elif choice == '3':
-                        pass
+                        all_authors = my_library.display_authors()
+                        for author in all_authors:
+                            print(f"Name: {author.name}, Biography: {author.biography}")
+                
                 except Exception as e:
                     print(f"An error occurred: {e}")
             elif choice == '4':
