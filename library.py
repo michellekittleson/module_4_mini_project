@@ -72,7 +72,7 @@ class Library:
     
     def get_user(self, name):
         for user in self.users:
-            if name == user.__name:
+            if name == user.name:
                 print("Found user")
                 return user
         print("No user found")    

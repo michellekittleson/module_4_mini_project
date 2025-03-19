@@ -37,19 +37,19 @@ def main():
                         
                     # Even though the book is displaying properly after being added, it says "Book is either not in the library or is already checked out."
                     elif choice == '2':
-                        title = input("Enter book to borrow: ").capitalize()
+                        title = input("Enter book to borrow: ").strip().title()
 
-                        print("Calling user function")
+                        # print("Calling user function")
                         current_user = my_library.get_user(input("Enter user's name: "))
 
                         book = my_library.get_book(title)
 
-                        print("book", book.title)
-                        print("current user", current_user.name)
+                        # print("book", book.title)
+                        # print("current user", current_user.name)
 
-                        print("calling book function")
+                        # print("calling book function")
                         my_library.borrow_book(book, current_user)
-                        print("Finished calling function")
+                        # print("Finished calling function")
                     # "Book return failed" Could be because borrow book function is not working properly.
                     elif choice == '3':
                         title = input("Enter book to return: ").capitalize()

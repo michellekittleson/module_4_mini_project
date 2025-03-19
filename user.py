@@ -1,6 +1,6 @@
 class User:
     def __init__(self, name, library_id):
-        self.__name = name
+        self.name = name
         self.__library_id = library_id
         self.__borrowed_books = []
     
