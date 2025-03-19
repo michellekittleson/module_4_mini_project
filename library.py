@@ -54,24 +54,35 @@ class Library:
         for author in self.authors:
             print(author)
     
-    def add_author(self, author): # Adjusted to take in author object instead of name and biography
-        # author.name = input("Enter author's name: ")
-        # author.biography = input("Enter author's biography: ")
+    # TODO: Adjust it to take in author object instead of name and biography
+    # OR: Create an author object inside the function and append it to the authors list
+    # removing the create new_author logic from choice 1 in main.py 
+    def add_author(self, author):
         self.authors.append(f"Name: {author.name}, Biography: {author.biography}")
     
     def add_user(self, name, library_id):
         new_user = User(name, library_id)
         self.users.append(new_user)
     
+    def get_book(self, title):
+        for book in self.books:
+            if book.title == title:
+                return book
+        return None
+    
     def get_user(self, name):
         for user in self.users:
-            if user.name == name:
+            if name == user.__name:
+                print("Found user")
                 return user
+        print("No user found")    
         return None # Return None if user not found
     
     def get_users(self):
         for user in self.users:
+            print("Found user")
             return user
+        print("no user found")
         return None
     
     def display_users(self):

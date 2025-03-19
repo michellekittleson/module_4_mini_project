@@ -7,11 +7,12 @@ def main():
 
     my_library = Library("The Library")
 
+    author = Author("Paulo Coelho", "Paulo Coelho is a Brazilian author who has published many books.")
     # Add defaults
-    # my_library.add_author("Paulo Coelho", "Paulo Coelho is a Brazilian author who has published many books.")
-    # my_library.add_user("Alice", "1234")
-    # my_library.add_user("Bob", "5678")
-    # my_library.add_book("The Alchemist", "Paulo Coelho", "Fiction", 1988)
+    my_library.add_author(author)
+    my_library.add_user("Alice", "1234")
+    my_library.add_user("Bob", "5678")
+    my_library.add_book("The Alchemist", "Paulo Coelho", "Fiction", 1988)
 
 
     while True:
@@ -37,11 +38,18 @@ def main():
                     # Even though the book is displaying properly after being added, it says "Book is either not in the library or is already checked out."
                     elif choice == '2':
                         title = input("Enter book to borrow: ").capitalize()
+
+                        print("Calling user function")
                         current_user = my_library.get_user(input("Enter user's name: "))
-                        if current_user and my_library.borrow_book(title, current_user):
-                            print(f"Book {title} has been borrowed.")
-                        else:
-                            print("Book is either not in the library or is already checked out.")
+
+                        book = my_library.get_book(title)
+
+                        print("book", book.title)
+                        print("current user", current_user.name)
+
+                        print("calling book function")
+                        my_library.borrow_book(book, current_user)
+                        print("Finished calling function")
                     # "Book return failed" Could be because borrow book function is not working properly.
                     elif choice == '3':
                         title = input("Enter book to return: ").capitalize()
