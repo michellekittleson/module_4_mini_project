@@ -35,7 +35,7 @@ def main():
                         my_library.add_book(title, author, genre, publication_date)
                         print(f"Book '{title}' has been added!")
                         
-                    # Even though the book is displaying properly after being added, it says "Book is either not in the library or is already checked out."
+                    # An error occurred: 'User' object has no attribute '_User__name'
                     elif choice == '2':
                         title = input("Enter book to borrow: ").strip().title()
 
@@ -50,7 +50,7 @@ def main():
                         # print("calling book function")
                         my_library.borrow_book(book, current_user)
                         # print("Finished calling function")
-                    # "Book return failed" Could be because borrow book function is not working properly.
+                    # An error occurred: 'User' object has no attribute '_User__name'
                     elif choice == '3':
                         title = input("Enter book to return: ").capitalize()
                         current_user = my_library.get_user(input("Enter user's name: "))
@@ -82,7 +82,7 @@ def main():
                         name = input("Enter user name: ")
                         library_id = input("Enter library id: ") 
                         my_library.add_user(name, library_id)
-                    # An error occurred: 'User' object has no attribute 'name'
+                    # An error occurred: 'User' object has no attribute '_User__name'
                     elif choice == '2':
                         name = input("Enter user name: ")
                         user = my_library.get_user(name) # Retrieve user object
@@ -109,11 +109,11 @@ def main():
                         new_author = Author(name, biography)
                         my_library.add_author(new_author)
                         print(f"Author {name} has been added!")
-                    # An error occurred: cannot access local variable 'author' where it is not associated with a value
+                    # An error occurred: 'str' object has no attribute 'name'
                     elif choice == '2':
                         new_author.view_author_details()
                         print(f"Name: {author.name}, Biography: {author.biography}")
-                    # An error occurred: 'NoneType' object is not iterable
+                    # Displays all authors, but follows with An error occurred: 'NoneType' object is not iterable
                     elif choice == '3':
                         all_authors = my_library.display_authors()
                         for author in all_authors:

@@ -27,3 +27,6 @@ class User:
             "Name": self.name,
             "Biography": self.biography
         }
+    
+    def get_name(self):
+        return self.__name

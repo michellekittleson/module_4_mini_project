@@ -6,7 +6,7 @@ class Library:
 
     def __init__(self, name):
         self.books = []
-        self.name = name
+        self.__name = name
         self.borrowed_books = []
         self.authors = []
         self.users = []
@@ -27,6 +27,7 @@ class Library:
             if book.availability: # check if book is available and rent out
                 book.availability = False
                 user.borrow_book(book)
+                return f"Borrowed book '{book.title}'."
             else:
                 return "Book is not available"
         else:
@@ -72,7 +73,7 @@ class Library:
     
     def get_user(self, name):
         for user in self.users:
-            if name == user.name:
+            if name == user.get_name():
                 print("Found user")
                 return user
         print("No user found")    
