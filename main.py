@@ -26,7 +26,7 @@ def main():
                 print("\nBook Operations:\n1. Add a new book\n2. Borrow a book\n3. Return a book\n4. Search for a book\n5. Display all books")
                 choice = input("Enter your choice: ")
                 try:
-                    # Works!
+
                     if choice == '1':
                         title = input("Enter title: ")
                         author = input("Enter author: ")
@@ -35,41 +35,36 @@ def main():
                         my_library.add_book(title, author, genre, publication_date)
                         print(f"Book '{title}' has been added!")
                         
-                    # An error occurred: 'User' object has no attribute '_User__name'
                     elif choice == '2':
                         title = input("Enter book to borrow: ").strip().title()
 
-                        # print("Calling user function")
                         current_user = my_library.get_user(input("Enter user's name: "))
 
                         book = my_library.get_book(title)
 
-                        # print("book", book.title)
-                        # print("current user", current_user.name)
+                        print("calling book function")
+                        borrowed_book_result = my_library.borrow_book(book, current_user)
+                        print(borrowed_book_result)
 
-                        # print("calling book function")
-                        my_library.borrow_book(book, current_user)
-                        # print("Finished calling function")
-                    # An error occurred: 'User' object has no attribute '_User__name'
                     elif choice == '3':
-                        title = input("Enter book to return: ").capitalize()
+                        title = input("Enter book to return: ").strip().title()
                         current_user = my_library.get_user(input("Enter user's name: "))
-                        if current_user and my_library.return_book(title, current_user):
-                            print(f"'{title}' has been returned.")
-                        else:
-                            print("Book return failed.")
-                    # Works!
+                        book = my_library.get_book(title)
+                        returned_book_result = my_library.return_book(book, current_user)
+                        print(returned_book_result)
+
                     elif choice == '4':
                         title = input("Enter title to search: ")
                         if my_library.search_title(title):
                             print(f"Book '{title}' found.")
                         else:
                             print(f"Book '{title}' not found in the library.")
-                    # Works!
+
                     elif choice == '5':
                         library_books = my_library.get_books()
                         for book in library_books:
                             print(f"Title: {book.title}, Author: {book.author}, Genre: {book.genre}, Publication Date: {book.publication_date}")
+
                 except Exception as e:
                     print(f"An error occurred: {e}")
 
@@ -77,12 +72,12 @@ def main():
                 print("\nUser Operations:\n1. Add a new user\n2. View user details\n3. Display all users")
                 choice = input("Enter your choice: ")
                 try:
-                    # Appears to work
+
                     if choice == '1':
                         name = input("Enter user name: ")
                         library_id = input("Enter library id: ") 
                         my_library.add_user(name, library_id)
-                    # An error occurred: 'User' object has no attribute '_User__name'
+
                     elif choice == '2':
                         name = input("Enter user name: ")
                         user = my_library.get_user(name) # Retrieve user object
@@ -90,11 +85,10 @@ def main():
                             print(user.name)
                         else:
                             print("User not found.")
-                    # An error occurred: 'User' object is not iterable
+
                     elif choice == '3':
-                        all_users = my_library.get_users()
-                        for user in all_users:
-                            print(f"User name: {user.name}, Library ID: {user.library_id}")
+                        my_library.get_users()
+
                 except Exception as e:
                     print(f"An error occurred: {e}")
 
@@ -102,28 +96,29 @@ def main():
                 print("\nAuthor Operations:\n1. Add a new author\n2. View author details\n3. Display all authors")
                 choice = input("Enter your choice: ")
                 try:
-                    # Appears to work
+                    # Create a new author 
                     if choice == '1':
                         name = input("Enter author name: ")
                         biography = input("Enter biography: ")
                         new_author = Author(name, biography)
                         my_library.add_author(new_author)
                         print(f"Author {name} has been added!")
-                    # An error occurred: 'str' object has no attribute 'name'
+
                     elif choice == '2':
-                        new_author.view_author_details()
-                        print(f"Name: {author.name}, Biography: {author.biography}")
-                    # Displays all authors, but follows with An error occurred: 'NoneType' object is not iterable
+                        name = input("Enter author's name to search: ")
+                        author = my_library.find_author(name)
+                        print(author.view_author_details())
+
                     elif choice == '3':
                         all_authors = my_library.display_authors()
-                        for author in all_authors:
-                            print(f"Name: {author.name}, Biography: {author.biography}")
-                
+
                 except Exception as e:
                     print(f"An error occurred: {e}")
+
             elif choice == '4':
                 print("Quitting system.")
                 break
+            
         except Exception as e:
             print(f"An error occurred: {e}")
 

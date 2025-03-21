@@ -29,4 +29,7 @@ class User:
         }
     
     def get_name(self):
-        return self.__name
+        return self.name
+    
+    def get_library_id(self):
+        return self.__library_id
